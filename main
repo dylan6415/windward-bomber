@@ -4,7 +4,16 @@
 <title>Setup Check</title>
 </head>
 <body>
-<h1>Ready to build!</h1>
-<p>If you can see this in your browser, your environment works.</p>
+<!-- Step 1: include our secure javascript file -->
+<script src="https://www.desmos.com/api/v1.12/calculator.js?apiKey=47ce54da89134d76a9e337ff2aa82f98"></script>
+
+<!-- Step 2: add an element to the page -->
+<div id="calculator" style="width: 600px; height: 400px;"></div>
+
+<!-- Step 3: add the following lines of javascript -->
+<script>
+    var elt = document.getElementById('calculator');
+    var calculator = Desmos.GraphingCalculator(elt);
+</script>
 </body>
 </html>
