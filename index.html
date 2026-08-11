@@ -1,17 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Setup Check</title>
+<title>Windward Bomber</title>
+    <style>
+          #gate {
+    max-width: 300px;
+    margin: 100px auto;
+    text-align: center;
+    font-family: sans-serif;
+  }
+  #gate input {
+    padding: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  #gate button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #gate.hidden, #calculator.hidden {
+    display: none;
+  }
+  #error {
+    color: #c74440;
+    font-size: 14px;
+    min-height: 20px;
+  }
+    </style>
 </head>
 <body>
+    <div id="gate">
+  <p>Enter password to view graph</p>
+  <input type="password" id="pw" placeholder="Password" />
+  <button onclick="checkPassword()">Enter</button>
+  <div id="error"></div>
+</div>
 <!-- Step 1: include our secure javascript file -->
 <script src="https://www.desmos.com/api/v1.12/calculator.js?apiKey=47ce54da89134d76a9e337ff2aa82f98"></script>
 
 <!-- Step 2: add an element to the page -->
-<div id="calculator" style="width: 1280px; height: 750px;"></div>
-
+<div id="calculator" class="hidden" style="width: 1280px; height: 750px;"></div>
 <!-- Step 3: add the following lines of javascript -->
 <script>
+    const PASSWORD = "bombCrownsteadChildren";
+
+function checkPassword() {
+    const entered = document.getElementById('pw').value;
+    if (entered === PASSWORD) {
+        document.getElementById('gate').classList.add('hidden');
+        document.getElementById('calculator').classList.remove('hidden');
+        loadGraph();
+    } else {
+        document.getElementById('error').textContent = "Incorrect password.";
+    }
+}
+
+document.getElementById('pw').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') checkPassword();
+});
+function loadGraph() {
     var elt = document.getElementById('calculator');
     const graphState = {
     "version": 11,
@@ -1229,6 +1279,7 @@ var calculator = Desmos.GraphingCalculator(elt, {
     expressions: false
 });
 calculator.setState(graphState);
+    }
 </script>
 </body>
 </html>
