@@ -46,21 +46,21 @@
 <div id="calculator" class="hidden" style="width: 1920px; height: 1080px;"></div>
 <script>
     const PASSWORD = "theresaChickenTree";
-function opsec() {
-    var opsecKey = document.getElementById('opsec').value
-}
+
 function checkPassword() {
-    var opsecKey = document.getElementById('opsec').value
-    const entered = document.getElementById('pw').value;
+    const entered = document.getElementById('opsec').value;
     if (entered === PASSWORD) {
         document.getElementById('gate').classList.add('hidden');
         document.getElementById('calculator').classList.remove('hidden');
-        loadGraph();
+        loadGraph(entered);
     } else {
         document.getElementById('error').textContent = "Incorrect password.";
     }
 }
 
+document.getElementById('opsec').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') checkPassword();
+});
 document.getElementById('pw').addEventListener('keyup', function(e) {
     if (e.key === 'Enter') checkPassword();
 });
