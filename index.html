@@ -48,16 +48,16 @@
     const PASSWORD = "theresaChickenTree";
 
 function checkPassword() {
-    const entered = document.getElementById('opsec').value;
+    const entered = document.getElementById('pw').value;
+    const opsecKey = document.getElementById('opsec').value;
     if (entered === PASSWORD) {
         document.getElementById('gate').classList.add('hidden');
         document.getElementById('calculator').classList.remove('hidden');
-        loadGraph(entered);
+        loadGraph(opsecKey);
     } else {
         document.getElementById('error').textContent = "Incorrect password.";
     }
 }
-
 document.getElementById('opsec').addEventListener('keyup', function(e) {
     if (e.key === 'Enter') checkPassword();
 });
