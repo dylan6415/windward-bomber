@@ -50,6 +50,7 @@ function opsec() {
     var opsecKey = document.getElementById('opsec').value
 }
 function checkPassword() {
+    var opsecKey = document.getElementById('opsec').value
     const entered = document.getElementById('pw').value;
     if (entered === PASSWORD) {
         document.getElementById('gate').classList.add('hidden');
@@ -1149,7 +1150,7 @@ function loadGraph(opsec) {
                 "id": "545",
                 "folderId": "213",
                 "color": "#388c46",
-                "latex": "p_{w}=503.2" + opsec,
+                "latex": "p_{w}=503.2" + opsecKey,
                 "slider": {
                     "hardMin": true,
                     "hardMax": true,
