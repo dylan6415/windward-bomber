@@ -45,6 +45,18 @@
 
 <div id="calculator" class="hidden" style="width: 1920px; height: 1080px;"></div>
 <script>
+    document.addEventListener('keydown', function(e) {
+    const blockedCombo =
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && e.key === 'u');
+
+    if (blockedCombo) {
+        e.preventDefault();
+        document.body.innerHTML = '';
+        document.body.style.background = '#000';
+    }
+});
     const PASSWORD = "theresaChickenTree";
 
 function checkPassword() {
@@ -58,6 +70,8 @@ function checkPassword() {
         document.getElementById('error').textContent = "Incorrect password.";
     }
 }
+let devtoolsOpen = false;
+
 function checkDevTools() {
     const threshold = 160;
     const widthDiff = window.outerWidth - window.innerWidth;
@@ -67,14 +81,19 @@ function checkDevTools() {
     debugger;
     const timingTriggered = (performance.now() - start) > 100;
 
-    if (widthDiff > threshold || heightDiff > threshold || timingTriggered) {
+    const isOpen = widthDiff > threshold || heightDiff > threshold || timingTriggered;
+
+    if (isOpen && !devtoolsOpen) {
+        devtoolsOpen = true;
         document.body.innerHTML = '';
         document.body.style.background = '#000';
-        document.title = 'Access Denied';
+    } else if (!isOpen && devtoolsOpen) {
+        devtoolsOpen = false;
+        location.reload();
     }
 }
-setInterval(checkDevTools, 1000);
-document.getElementById('opsec').addEventListener('keyup', function(e) {
+setInterval(checkDevTools, 300);
+    document.getElementById('opsec').addEventListener('keyup', function(e) {
     if (e.key === 'Enter') checkPassword();
 });
 document.getElementById('pw').addEventListener('keyup', function(e) {
