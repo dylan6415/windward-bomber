@@ -45,6 +45,27 @@
 
 <div id="calculator" class="hidden" style="width: 1920px; height: 1080px;"></div>
 <script>
+    document.addEventListener('keydown', function(e) {
+    const blockedCombo =
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.ctrlKey && e.key === 'u');
+
+    if (blockedCombo) {
+        e.preventDefault();
+        document.body.innerHTML = '';
+        document.body.style.background = '#000';
+    }
+});
+    function checkDevTools() {
+    const threshold = 160;
+    const widthDiff = window.outerWidth - window.innerWidth;
+    const heightDiff = window.outerHeight - window.innerHeight;
+
+    if (widthDiff > threshold || heightDiff > threshold) {
+        window.location.href = "https://windward-roblox.fandom.com/wiki/Chariot"; 
+    }
+}
 setInterval(checkDevTools, 300);
     const PASSWORD = "theresaChickenTree";
 
@@ -81,7 +102,7 @@ function checkDevTools() {
         location.reload();
     }
 }
-setInterval(checkDevTools, 200);
+setInterval(checkDevTools, 300);
     document.getElementById('opsec').addEventListener('keyup', function(e) {
     if (e.key === 'Enter') checkPassword();
 });
