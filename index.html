@@ -57,6 +57,16 @@
         document.body.style.background = '#000';
     }
 });
+    function checkDevTools() {
+    const threshold = 160;
+    const widthDiff = window.outerWidth - window.innerWidth;
+    const heightDiff = window.outerHeight - window.innerHeight;
+
+    if (widthDiff > threshold || heightDiff > threshold) {
+        window.location.href = "https://windward-roblox.fandom.com/wiki/Chariot"; 
+    }
+}
+setInterval(checkDevTools, 300);
     const PASSWORD = "theresaChickenTree";
 
 function checkPassword() {
